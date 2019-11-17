@@ -1,6 +1,42 @@
 # Recursive Renamer
 
-Tool for recursive renaming folders, files for you assets.
+Tool for recursive renaming folders, files for you assets. 
+
+`RecursiveRenamer.run("path_to/main_folder", "static_assets", [".DS_Store", "README"])`
+```c
+main_folder
+│   README.md
+│   image with  Spaces.jpg
+|   .DS_Store  
+│
+└───folder1
+    │   CssStyle.txt
+    │
+    └───subfolder1
+        │   file111 -- - 0019487.txt
+        │   ...
+```    
+
+```c
+static_assets
+│   image-with-spaces.jpg  
+│
+└───folder1
+    │   cssstyle.txt
+    │
+    └───subfolder1
+        │   file111-0019487.txt
+        │   ...
+    
+```
+
+### Features
+  1. Lowercase path
+  2. Multi empty spaces to dash: "   " -> "-"
+  3. Multi dashes and empty spaces to dash: "----   " -> "-"
+  4. Recursive folder creation
+  5. Custom format functions
+
 
 ## Installation
 
