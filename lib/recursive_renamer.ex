@@ -6,7 +6,29 @@ defmodule RecursiveRenamer do
   2. empty spaces -> dash
   3. Add your
   """
-  def ls_r(path \\ ".") do
+
+  def run(folder_path, new_folder_name, ignore \\ [], format_cb \\ &return_value/1) do
+    current_folder_name = Path.basename(folder_path)
+
+    folder_path
+    |> ls_r()
+    |> Enum.filter(fn item -> !String.contains?(item, ignore) end)
+    |> Enum.map(fn item ->
+      destination_path =
+        item |> format_path(current_folder_name, new_folder_name, format_cb) |> create_folder()
+
+      with :ok <- File.cp(item, destination_path) do
+        IO.inspect("File saved! #{destination_path}")
+        :ok
+      else
+        error ->
+          IO.inspect("Error during saving file #{inspect(error)}")
+          error
+      end
+    end)
+  end
+
+  defp ls_r(path \\ ".") do
     cond do
       File.regular?(path) ->
         [path]
@@ -52,25 +74,5 @@ defmodule RecursiveRenamer do
     end
   end
 
-  def run(folder_path, new_folder_name, ignore \\ [], format_cb \\ &return_value/1) do
-    current_folder_name = Path.basename(folder_path)
-    folder_path
-    |> ls_r()
-    |> Enum.filter(fn item -> !String.contains?(item, ignore) end)
-    |> Enum.map(fn item ->
-      destination_path =
-        item |> format_path(current_folder_name, new_folder_name, format_cb) |> create_folder()
-
-      with :ok <- File.cp(item, destination_path) do
-        IO.inspect("File saved! #{destination_path}")
-        :ok
-      else
-        error ->
-          IO.inspect("Error during saving file #{inspect(error)}")
-          error
-      end
-    end)
-  end
-
-  def return_value(value), do: value
+  defp return_value(value), do: value
 end

@@ -1,6 +1,6 @@
 # Recursive Renamer
 
-Tool for recursive renaming folders and files for you assets. 
+Tool for recursive renaming folders and files for your static assets. 
 
 `RecursiveRenamer.run("path/to/main_folder", "static_assets", [".DS_Store", "README"])`
 ```c
@@ -40,7 +40,7 @@ static_assets
   5. Custom format functions
 
 
-## Installation (Not yet in hex)
+## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
 by adding `recursive_renamer` to your list of dependencies in `mix.exs`:
@@ -86,3 +86,7 @@ Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_do
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/recursive_renamer](https://hexdocs.pm/recursive_renamer).
 
+
+## Todo
+- [ ] Add tests
+- [ ] Doctests
