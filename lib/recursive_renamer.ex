@@ -28,6 +28,7 @@ defmodule RecursiveRenamer do
     path
     |> String.replace(current_folder_name, destination_folder_name)
     |> String.replace(~r/-|—/, " ")
+    |> String.replace(~r/\(|\)/, "")
     |> String.replace(~r/\s\s+/, " ")
     |> String.replace(" ", "-")
     |> String.downcase()
